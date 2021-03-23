@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'quiz-editor';
+
+  tooltip = new Date().getSeconds() % 2 == 0 ? 'blue' : 'red';
 }
