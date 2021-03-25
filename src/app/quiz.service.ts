@@ -6,4 +6,25 @@ import { Injectable } from '@angular/core';
 export class QuizService {
 
   constructor() { }
+
+  loadQuizzes() {
+    const quizzes = [
+        {
+          name: "Quiz 1", 
+          questions: [
+            "Foo", 
+            "Bar"
+          ]
+        }, 
+        {
+          name: "Quiz 2", 
+          questions: [
+            "Rigby", 
+            "Tank"
+          ]
+        }
+    ]; 
+
+    return quizzes; 
+  }
 }
