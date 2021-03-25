@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BandersonQuizService } from './banderson-quiz.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'quiz-editor';
+export class AppComponent implements OnInit {
 
-  toolTip = new Date().getSeconds() % 2 == 0 ? 'blue' : 'red';
+  constructor(
+    private quizSvc: BandersonQuizService
+  ) {}
+
+    quizzes = [];
+
+  ngOnInit() {
+    this.quizzes = this.quizSvc.loadQuizzes();
+    console.log(this.quizzes);
+  }
+
+  title = 'quiz-editor';
 }
