@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.quizzes = this.quizSvc.loadQuizzes();
-    console.log(this.quizzes);
   }
 
   title = 'quiz-editor';
