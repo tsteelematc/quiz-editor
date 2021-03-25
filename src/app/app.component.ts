@@ -6,7 +6,9 @@ import { QuizService } from './quiz.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
+
   constructor(private quizSVC: QuizService) {}
 
   quizzes = [];
@@ -22,5 +24,16 @@ export class AppComponent implements OnInit {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+  }
+
+  addNewQuiz() {
+    const newQuiz = {
+      name: "Untitled Quiz",
+      questions: []
+    };
+
+    this.quizzes = [...this.quizzes, newQuiz];
+
+    this.selectQuiz(newQuiz);
   }
 }
