@@ -5,13 +5,13 @@
       <button class="btn btn-outline-success mt-3">
         Add New Quiz
       </button>
-      <div class="card">
-        <div class="card-header">
-          Quize List
-        </div>
-        <div class="card-body">
-          coming soon
-        </div>
+      <div class="list-group mt-3">
+        <button
+        *ngFor="let quiz of quizzes"
+        class="list-group-item list-group-item-action"
+        >
+        {{ quiz.name }}
+        </button>
       </div>
     </div>
     <div class="col-md-8">
@@ -31,7 +31,7 @@
         </div>
         <div class="card mt-3">
           <div class="card-header">
-            Quiz
+            Questions
           </div>
           <div class="card-body">
             Coming soon
@@ -39,7 +39,7 @@
         </div>
         <div class="card mt-3">
           <div class="card-header">
-            General
+            Other
           </div>
           <div class="card-body">
             Coming soon
