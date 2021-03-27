@@ -38,12 +38,18 @@ export class AppComponent implements OnInit {
   }
 
   addQuiz() {
+
+    const newQuiz = {
+      name: 'Untitled Quiz',
+      questions: []
+    };
+
     this.quizzes = [
       ...this.quizzes,
-      {
-        name: 'Untitled',
-      }
+      newQuiz
     ];
+
+    this.selectQuiz(newQuiz);
   }
 
 }
