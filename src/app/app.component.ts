@@ -27,14 +27,8 @@ export class AppComponent implements OnInit {
 
   selectedQuiz = undefined;
 
-  updatedQuizName = "";
-
   selectQuiz(q) {
     this.selectedQuiz = q;
-  }
-
-  updateName(q) {
-    q.name = this.updatedQuizName;
   }
 
   addQuiz() {
