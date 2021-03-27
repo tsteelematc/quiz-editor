@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes = [];
 
@@ -27,7 +27,14 @@ export class AppComponent implements OnInit {
 
   selectedQuiz = undefined;
 
+  updatedQuizName = "";
+
   selectQuiz(q) {
     this.selectedQuiz = q;
   }
+
+  updateName(q) {
+    q.name = this.updatedQuizName;
+  }
+
 }
