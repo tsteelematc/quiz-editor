@@ -37,4 +37,13 @@ export class AppComponent implements OnInit {
     q.name = this.updatedQuizName;
   }
 
+  addQuiz() {
+    this.quizzes = [
+      ...this.quizzes,
+      {
+        name: 'Untitled',
+      }
+    ];
+  }
+
 }
