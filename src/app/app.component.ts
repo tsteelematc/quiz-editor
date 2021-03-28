@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   addNewQuiz() {
     // add a new quiz to quizzes
     let newQuiz = {
-      name: "New Quiz", 
+      name: "Untitled Quiz", 
       questions: []
     }
 
