@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.quizzes = this.quizSvc.loadQuizzes(); 
-    console.log(this.quizzes);
+    // console.log(this.quizzes);
     
   }
 
@@ -32,5 +32,19 @@ export class AppComponent implements OnInit {
   }
 
   title = 'quiz-editor';
+
+  addNewQuiz() {
+    // add a new quiz to quizzes
+    let newQuiz = {
+      name: "New Quiz", 
+      questions: []
+    }
+
+    this.quizzes.push(newQuiz); 
+     
+    // set the selectedQuiz to the newest quiz
+    this.selectQuiz(newQuiz); 
+
+  }
   
 }
