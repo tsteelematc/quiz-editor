@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   ) {
   }
 
+  title = 'quiz-editor';
+  selectedQuiz = undefined;
   quizzes =[];
 
   ngOnInit(){
@@ -20,14 +22,14 @@ export class AppComponent implements OnInit {
     console.log(this.quizzes);
   }
 
-  title = 'quiz-editor';
-  //toolTip = new Date().getSeconds() % 2 == 0 ? 'blue' : 'red';
-
-  selectedQuiz = undefined;
+  addNewQuiz() {
+    const newQuiz = {name: "New Quiz", questions: ["foo","bar"]};
+    this.quizzes.push(newQuiz);
+    this.selectedQuiz = newQuiz;
+  }
 
   selectQuiz(quiz) {
-    this.selectedQuiz = quiz;
-    
+    this.selectedQuiz = quiz;    
   } //Can also do lambda, does the same thing
   // selectQuiz = (quiz) =>{...}
 }
