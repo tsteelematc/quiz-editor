@@ -19,7 +19,21 @@ export class AppComponent implements OnInit {
   quizzes = [];
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.loadQuizzes();
+    this.quizSvc
+    .loadQuizzes()
+    .subscribe(
+      //lamda w/ data
+      (data) => {
+        console.log(data);
+        this.quizzes = data;
+      }
+      //lamda w/ errors, if they exist
+      , (error) => {
+        console.error(error);
+      }
+    )
+    ;
+
     console.log(this.quizzes);
   }
 
