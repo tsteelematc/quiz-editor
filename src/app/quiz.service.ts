@@ -20,7 +20,6 @@ export class QuizService {
         name: "Quiz Cat"
         , questions: [
           "Foo"
-          ,"Bar"
         ]
       }
     ];
