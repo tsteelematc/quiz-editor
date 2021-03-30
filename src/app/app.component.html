@@ -17,6 +17,7 @@
           {{ quiz.name }}
           <small
             class="font-italic font-weight-lighter"
+            [class.text-warning]="quiz.questions.length == 0"
           >
             {{ quiz.questions.length }} question<span *ngIf="quiz.questions.length != 1">s</span>
           </small>
@@ -59,6 +60,11 @@
       <div class="card mt-3">
         <div class="card-header">
           Questions
+          <span 
+            class="ml-3 text-warning"
+            *ngIf="selectedQuiz.questions.length == 0">
+            No Questions
+          </span>
         </div>
         <div class="card-body">
           Coming soon
