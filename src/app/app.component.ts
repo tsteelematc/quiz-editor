@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -14,12 +14,23 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes = [];
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.loadQuizzes();
+    this.quizSvc
+      .loadQuizzes()
+      // This is an async task:
+      .subscribe(
+        // Lambda with data
+        (data) => {
+          console.log(data);
+          this.quizzes = data;
+        },
+        // Lambda with errors if errors exists
+        (err) => console.log(err)
+      );
     console.log(this.quizzes);
   }
 
