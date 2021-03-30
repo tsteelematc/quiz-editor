@@ -10,18 +10,18 @@ export class QuizService {
   loadQuizzes() {
     const quizzesFromTheCloud = [
       {
-        name: "Quiz 1",
-        questions: [
-          "Fiddlestix",
-          "Snickerdoodles"
+        name: "Quiz 1"
+        , questions: [
+          "Foo"
+          , "Bar"
         ]
-      },
-      {
-        name: "Quiz 2",
-        questions: []
+      }
+      , {
+        name: "Quiz 2"
+        , questions: []
       }
     ];
+
     return quizzesFromTheCloud;
   }
-
 }

@@ -1,4 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { 
+  Component
+  , OnInit 
+} from '@angular/core';
+
 import { QuizService } from './quiz.service';
 
 @Component({
@@ -6,7 +10,7 @@ import { QuizService } from './quiz.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
@@ -25,5 +29,20 @@ export class AppComponent implements OnInit{
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+  }
+
+  addNewQuiz() {
+
+    const newQuiz = {
+      name: "Untitled Quiz"
+      , questions: []
+    };
+
+    this.quizzes = [
+      ...this.quizzes
+      , newQuiz
+    ];
+
+    this.selectQuiz(newQuiz);
   }
 }
