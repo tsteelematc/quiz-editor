@@ -57,6 +57,10 @@
         <div class="card mt-3">
           <div class="card-header">
             Questions
+            <span class="ml-3 text-warning"
+            *ngIf="selectedQuiz.questions.length == 0">
+              No Questions
+            </span>
           </div>
           <div class="card-body">
             Coming soon
