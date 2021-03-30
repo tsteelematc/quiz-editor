@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -19,7 +19,16 @@ export class AppComponent implements OnInit {
   quizzes = [];
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.loadQuizzes();
+    this.quizSvc.loadQuizzes().subscribe(
+      // takes 2 parameter, lambda with data
+      (data) => {
+        console.log(data);
+        this.quizzes = data;
+      }
+
+      // lambda if errors exist
+      , (err) => console.error(err)
+    );
     console.log(this.quizzes);
   }
 
