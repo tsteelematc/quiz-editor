@@ -21,17 +21,14 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.quizSvc
       .loadQuizzes()
-      .subscribe(
-        
+      .subscribe(        
         // Lamda with the data
         (data) => {
           console.log(data);
           this.quizzes = data;
         }
-
         // Lamda with the errors, if errors exist
         , (err) => console.error(err)
-
       )
     ;
 
@@ -46,18 +43,28 @@ export class AppComponent implements OnInit {
     this.selectedQuiz = q;
   }
 
-  addNewQuiz() {
+  removeQuestion(q) {
+    this.selectedQuiz.questions =  this.selectedQuiz.questions.filter(x => x != q);
+  }
 
+  addNewQuestion() {
+    this.selectedQuiz.questions = [
+      ...this.selectedQuiz.questions
+      , {
+        name: "Untitled Question"
+      }
+    ];
+  }
+
+  addNewQuiz() {
     const newQuiz = {
       name: "Untitled Quiz"
       , questions: []
     };
-
     this.quizzes = [
       ...this.quizzes
       , newQuiz
     ];
-
     this.selectQuiz(newQuiz);
   }
 }
