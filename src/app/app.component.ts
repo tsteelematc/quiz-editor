@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes = [];
 
@@ -22,18 +22,18 @@ export class AppComponent implements OnInit {
     this.quizSvc
       .loadQuizzes()
       .subscribe(
-        
-        // Lamda with the data
+
+        // Lambda with the data
         (data) => {
           console.log(data);
           this.quizzes = data;
         }
 
-        // Lamda with the errors, if errors exist
+        // Lambda with the errors, if errors exist
         , (err) => console.error(err)
 
       )
-    ;
+      ;
 
     console.log(this.quizzes);
   }
