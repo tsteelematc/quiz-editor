@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.quizSvc
       .loadQuizzes()
       .subscribe(
-        
+
         // Lamda with the data
         (data) => {
           console.log(data);
@@ -59,5 +59,9 @@ export class AppComponent implements OnInit {
     ];
 
     this.selectQuiz(newQuiz);
+  }
+
+  removeQuestion(questionToRemove) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x != questionToRemove);
   }
 }
