@@ -6,7 +6,7 @@ export class QuizService {
 
   constructor() { }
 
-// load the quizzes by using this method and calling from the component 
+// load the quizzes by using this method and calling from the component
   loadQuizzes() {
     const quizzesFromTheCloud = [
       {
@@ -15,7 +15,7 @@ export class QuizService {
       },
       {
         name: "Quiz 2",
-        questions: []
+        questions: ["Cat"]
       }
     ];
 
