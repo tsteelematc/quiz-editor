@@ -1,9 +1,9 @@
 import {
-    Component,
-    OnInit
+  Component
+  , OnInit
 } from '@angular/core';
 
-import { QuizService} from './quiz.service';
+import { QuizService } from './quiz.service';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +13,29 @@ import { QuizService} from './quiz.service';
 export class AppComponent implements OnInit {
 
   constructor(
-      private quizSvc: QuizService
+    private quizSvc: QuizService
   ) {}
 
   quizzes = [];
 
   ngOnInit() {
-      this.quizzes = this.quizSvc.loadQuizzes();
-      console.log(this.quizzes);
+    this.quizSvc
+      .loadQuizzes()
+      .subscribe(
+
+        // Lamda with the data
+        (data) => {
+          console.log(data);
+          this.quizzes = data;
+        }
+
+        // Lamda with the errors, if errors exist
+        , (err) => console.error(err)
+
+      )
+    ;
+
+    console.log(this.quizzes);
   }
 
   title = 'quiz-editor';
@@ -28,7 +43,21 @@ export class AppComponent implements OnInit {
   selectedQuiz = undefined;
 
   selectQuiz(q) {
-      this.selectedQuiz = q;
+    this.selectedQuiz = q;
   }
 
+  addNewQuiz() {
+
+    const newQuiz = {
+      name: "Untitled Quiz"
+      , questions: []
+    };
+
+    this.quizzes = [
+      ...this.quizzes
+      , newQuiz
+    ];
+
+    this.selectQuiz(newQuiz);
+  }
 }
