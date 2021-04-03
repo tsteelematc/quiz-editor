@@ -1,60 +1,72 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <button class="btn btn-outline-success mt-3">
-                Add New Quiz
-            </button>
-            <div class="list-group mt-3">
-                <button *ngFor="let quiz of quizzes"
-                        class="list-group-item list-group-item-action"
-                        [class.active]="quiz == selectedQuiz"
-                        (click)="selectQuiz(quiz)">
-
-                {{ quiz.name }}
-            </button>
-
-            </div>
-        </div>
-        <div class="col-md-8" *ngIf="selectedQuiz == undefined">
-            <div class="alert alert-info mt-3">
-                <h3>
-                    No Quiz Selected
-                </h3>
-                Select or add a new quiz
-            </div>
-        </div>
-        <div class="col-md-8"
-             *ngIf="selectedQuiz != undefined">
-            <button class="btn btn-outline-dark mt-3">
-                Save
-            </button>
-            <button class="btn btn-link mt-3">
-                Cancel
-            </button>
-            <div class="card mt-3">
-                <div class="card-header">
-                    General
-                </div>
-                <div class="card-body">
-                    {{ selectedQuiz.name }}
-                </div>
-            </div>
-            <div class="card mt-3">
-                <div class="card-header">
-                    Questions
-                </div>
-                <div class="card-body">
-                    Coming Soon
-                </div>
-            </div>
-            <div class="card mt-3">
-                <div class="card-header">
-                    Other
-                </div>
-                <div class="card-body">
-                    Coming Soon
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-4">
+      <button
+        class="btn btn-outline-success mt-3"
+        (click)="addQuiz()">
+        Add New Quiz
+      </button>
+      <div class="list-group mt-3">
+        <button
+          *ngFor="let quiz of quizzes"
+          class="list-group-item list-group-item-action"
+          [class.active]="quiz == selectedQuiz"
+          (click)="selectQuiz(quiz)"
+        >
+          {{ quiz.name }}
+        </button>
+      </div>
     </div>
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz == undefined"
+    >
+      <div class="alert alert-info mt-3">
+        <h3>
+          No Quiz Selected
+        </h3>
+        Select or add a new quiz
+      </div>
+    </div>
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz != undefined"
+    >
+      <button class="btn btn-outline-dark mt-3">
+        Save
+      </button>
+      <button class="btn btn-link mt-3">
+        Cancel
+      </button>
+      <div class="card mt-3">
+        <div class="card-header">
+          General
+        </div>
+        <div class="card-body">
+          <input
+            type="text"
+            class="form-control"
+            id="selectedQuizName"
+            [(ngModel)]="selectedQuiz.name"
+            >
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-header">
+          Questions
+        </div>
+        <div class="card-body">
+          Coming soon
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-header">
+          Other
+        </div>
+        <div class="card-body">
+          Coming soon
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

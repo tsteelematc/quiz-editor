@@ -14,27 +14,12 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes = [];
 
   ngOnInit() {
-    this.quizSvc
-      .loadQuizzes()
-      .subscribe(
-
-        // Lamda with the data
-        (data) => {
-          console.log(data);
-          this.quizzes = data;
-        }
-
-        // Lamda with the errors, if errors exist
-        , (err) => console.error(err)
-
-      )
-    ;
-
+    this.quizzes = this.quizSvc.loadQuizzes();
     console.log(this.quizzes);
   }
 
@@ -46,18 +31,19 @@ export class AppComponent implements OnInit {
     this.selectedQuiz = q;
   }
 
-  addNewQuiz() {
+  addQuiz() {
 
     const newQuiz = {
-      name: "Untitled Quiz"
-      , questions: []
+      name: 'Untitled Quiz',
+      questions: []
     };
 
     this.quizzes = [
-      ...this.quizzes
-      , newQuiz
+      ...this.quizzes,
+      newQuiz
     ];
 
     this.selectQuiz(newQuiz);
   }
+
 }
