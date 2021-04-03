@@ -15,7 +15,19 @@ export class AppComponent implements OnInit {
   quizzes = [];
 
   ngOnInit() {
-    this.quizzes = this.quizSvc.loadQuizzes();
+    this.quizSvc
+        .loadQuizzes()
+        .subscribe(
+            //Lambda with the data
+            (data) => {
+                console.log(data);
+                this.quizzes = data;
+            },
+
+            //Lambda with the errors, if errors exist
+            (err) => console.error(err)
+        );
+
     console.log(this.quizzes);
   }
 
