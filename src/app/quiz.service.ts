@@ -6,18 +6,16 @@ export class QuizService {
 
   constructor() { }
 
+// load the quizzes by using this method and calling from the component 
   loadQuizzes() {
     const quizzesFromTheCloud = [
       {
-        name: "Quiz 1"
-        , questions: [
-          "Foo"
-          , "Bar"
-        ]
-      }
-      , {
-        name: "Quiz 2"
-        , questions: []
+        name: "Quiz 1",
+        questions: ["Foo", "Bar"]
+      },
+      {
+        name: "Quiz 2",
+        questions: []
       }
     ];
 

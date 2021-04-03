@@ -1,8 +1,4 @@
-import {
-  Component
-  , OnInit
-} from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import { QuizService } from './quiz.service';
 
 @Component({
@@ -13,7 +9,7 @@ import { QuizService } from './quiz.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private quizSvc: QuizService
+    private quizSvc: QuizService  //the import also needs to be added above.
   ) { }
 
   quizzes = [];
