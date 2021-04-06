@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   quizzes = [];
+  errorLoadingQuizzes = false;
 
   ngOnInit() {
     this.quizSvc
@@ -30,8 +31,8 @@ export class AppComponent implements OnInit {
         }
 
         // Lamda with the errors, if errors exist
-        , (err) => console.error(err)
-
+        , (err) => {console.error(err);
+          this.errorLoadingQuizzes = true;}
       )
     ;
 
