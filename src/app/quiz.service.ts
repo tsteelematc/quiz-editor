@@ -13,4 +13,19 @@ export class QuizService {
 
     return this.builtInAngularHttpSvc.get<any[]>("https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Mystery%20Quiz");
   }
+
+  // This promise will return a number (or an error)
+  getMagicNumber(makeThisPromiseSucceed: boolean): Promise<number> {
+
+    return new Promise<number>(
+      (resolve, reject) => {
+        // Promises are to make long running operations (ex. cloud call)
+        if (makeThisPromiseSucceed) {
+          resolve(42);
+        } else {
+          reject("There are no magic numbers!");
+        }
+      }
+    );
+  }
 }
