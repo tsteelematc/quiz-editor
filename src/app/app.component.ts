@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   quizzes = [];
   errorLoadingQuizzes = false;
+  loading = true;
 
   ngOnInit() {
     this.quizSvc
@@ -28,12 +29,14 @@ export class AppComponent implements OnInit {
         (data) => {
           console.log(data);
           this.quizzes = data;
+          this.loading = false;
         }
 
         // Lamda with the errors, if errors exist
         , (err) => {
            console.error(err)
            this.errorLoadingQuizzes = true;
+           this.loading = false;
         }
 
       )
@@ -63,5 +66,27 @@ export class AppComponent implements OnInit {
     ];
 
     this.selectQuiz(newQuiz);
+  }
+
+  jsPromisesOne() {
+    const n = this.quizSvc.getMagicNumber(true);
+    console.log(n);
+    n.then(number => {
+      console.log(number);
+    })
+    .catch(err =>{
+      console.error(err);
+    })
+    ;
+  }
+
+  async jsPromisesTwo() {
+    try{
+    const n = await this.quizSvc.getMagicNumber(true);
+    console.log(n);
+    }
+    catch(err) {
+      console.error(err);
+    }
   }
 }
