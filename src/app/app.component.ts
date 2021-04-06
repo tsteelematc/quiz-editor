@@ -40,7 +40,10 @@ export class AppComponent implements OnInit {
       questions: []
     }
 
-    this.quizzes.push(newQuiz); 
+    this.quizzes = [
+        ...this.quizzes, 
+        newQuiz
+    ]; 
      
     // set the selectedQuiz to the newest quiz
     this.selectQuiz(newQuiz); 
