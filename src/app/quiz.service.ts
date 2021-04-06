@@ -26,7 +26,7 @@ export class QuizService {
         {
             name: "Quiz 3", 
             questions: [
-                "Nice"
+                
             ]
         }
     ]; 
