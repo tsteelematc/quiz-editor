@@ -78,4 +78,52 @@ export class AppComponent implements OnInit {
       }
     ];
   }
+
+  jsPromisesOne() {
+    const n = this.quizSvc.getMagicNumber(true);
+    console.log(n);
+
+    // Promises are also called "thenables" for a reason
+    n.then(number => {
+      console.log(number);
+
+      const n2 = this.quizSvc.getMagicNumber(true);
+      console.log(n2);
+
+      n2.then(number => console.log(number))
+      .catch(err => console.error(err))
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
+
+  async jsPromisesTwo() {
+    try {
+      const n = await this.quizSvc.getMagicNumber(true);
+      console.log(n);
+
+      const n2 = await this.quizSvc.getMagicNumber(true);
+      console.log(n2);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+  async jsPromisesThree() {
+    const n = this.quizSvc.getMagicNumber(true);
+    const n2 = this.quizSvc.getMagicNumber(true);
+
+    console.log(n, n2);
+
+    try {
+      // const foo = await Promise.all([n, n2]);
+      const foo = await Promise.race([n, n2]);
+      console.log(foo);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
 }
