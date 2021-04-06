@@ -68,4 +68,55 @@ export class AppComponent implements OnInit {
 
     this.selectQuiz(newQuiz);
   }
+
+  jsPromisesOne() {
+    const n = this.quizSvc.getMagicNumber(true);
+    console.log(n); // ? ? ?
+
+    n
+      .then(
+        number => {
+          console.log(number);
+          const n2 = this.quizSvc.getMagicNumber(true);
+          console.log(n2); // ? ? ?
+
+          n2
+            .then(number2 => console.log(number2))
+            .catch(err2 => console.error(err2))
+        }
+      )
+      .catch(
+        err => console.error(err)
+      )
+    ;
+  }
+
+  async jsPromisesTwo() {
+
+    try {
+      const n = await this.quizSvc.getMagicNumber(true);
+      console.log(n); // ? ? ?
+
+      const n2 = await this.quizSvc.getMagicNumber(true);
+      console.log(n2); // ? ? ?
+    }
+
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+  async jsPromisesThree() {
+    try {
+      const n = this.quizSvc.getMagicNumber(true);
+      const n2 = this.quizSvc.getMagicNumber(true);
+
+      //const foo = await Promise.all([n, n2]);
+      const foo = await Promise.race([n, n2]);
+      console.log(foo); // ? ? ?
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
 }
