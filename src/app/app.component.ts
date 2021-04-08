@@ -13,6 +13,8 @@ interface QuizDisplay {
   // }[];
   
   questions: QuestionDisplay[];
+
+  markedForDelete: boolean;
 }
 
 
@@ -44,13 +46,17 @@ export class AppComponent implements OnInit {
     this.loadQuizzesForDisplay();
     console.log(this.quizzes);
   }
-
   async loadQuizzesForDisplay() {
     try {
-      this.quizzes = await this.quizSvc.loadQuizzes();
+      this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
+        name: x.name
+        , questions: x.questions
+        , markedForDelete: false
+      }));
       console.log(this.quizzes);
       this.loading = false;
     }
+
     catch (err) {
       console.error(err);
       this.errorLoadingQuizzes = true;
@@ -71,6 +77,7 @@ export class AppComponent implements OnInit {
     const newQuiz = {
       name: "Untitled Quiz"
       , questions: []
+      , markedForDelete: false
     };
 
     this.quizzes = [
