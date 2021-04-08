@@ -60,4 +60,11 @@ export class AppComponent implements OnInit {
 
     this.selectQuiz(newQuiz);
   }
+
+  removeQuestion(questionToRemove){
+    //filter makes a new array with all that evaluate true (all except the question that == this question)
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x != questionToRemove);
+
+    
+  }
 }
