@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -14,35 +14,32 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes = [];
   errorLoadingQuizzes = false;
   loading = true;
 
   ngOnInit() {
-    this.quizSvc
-      .loadQuizzes()
-      .subscribe(
-        
-        // Lamda with the data
-        (data) => {
-          console.log(data);
-          this.quizzes = data;
-          this.loading = false;
-        }
 
-        // Lamda with the errors, if errors exist
-        , (err) => {
-          console.error(err);
-          this.errorLoadingQuizzes = true;
-          this.loading = false;
-        }
-
-      )
-    ;
-
+    this.loadQuizzesForDisplay();
     console.log(this.quizzes);
+  }
+
+  async loadQuizzesForDisplay() {
+
+    try {
+
+      this.quizzes = await this.quizSvc.loadQuizzes();
+      console.log(this.quizzes);
+      this.loading = false;
+
+    } catch (err) {
+
+      console.error(err);
+      this.errorLoadingQuizzes = true;
+      this.loading = false;
+    }
   }
 
   title = 'quiz-editor';
@@ -78,11 +75,11 @@ export class AppComponent implements OnInit {
       , {
         name: "Untitled Question"
       }
-    ];    
+    ];
   }
 
   jsPromisesOne() {
-    
+
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -99,12 +96,12 @@ export class AppComponent implements OnInit {
         n2
           .then(number => console.log(number))
           .catch(err => console.error(err))
-        ;
+          ;
       })
       .catch(err => {
-        console.error(err)
+        console.error(err);
       })
-    ;
+      ;
   }
 
   async jsPromisesTwo() {
