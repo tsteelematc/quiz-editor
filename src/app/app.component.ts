@@ -12,11 +12,14 @@ interface QuizDisplay {
   //  name: string;
   //}[];
   questions: QuestionDisplay[];
+
+  markedForDelete: boolean;
 }
 
 //Type Definitions are almost identical to interfaces...
 type QuestionDisplay = {
   name: string;
+
 
 }
 
@@ -45,7 +48,11 @@ export class AppComponent implements OnInit {
 
   async loadQuizzesForDisplay() {
     try {
-      this.quizzes = await this.quizSvc.loadQuizzes();
+      this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
+        name: x.name
+        , questions: x.questions
+        , markedForDelete: false
+      }));
       console.log(this.quizzes);
       this.loading = false;
 
@@ -70,6 +77,7 @@ export class AppComponent implements OnInit {
     const newQuiz = {
       name: "Untitled Quiz"
       , questions: []
+      , markedForDelete: false
     };
 
     this.quizzes = [
