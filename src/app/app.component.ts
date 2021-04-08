@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
 
   title = 'quiz-editor';
 
-  selectedQuiz = undefined;
+  selectedQuiz: QuizDisplay = undefined;
 
   selectQuiz(q) {
     this.selectedQuiz = q;
