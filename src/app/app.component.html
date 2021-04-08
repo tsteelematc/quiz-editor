@@ -76,14 +76,15 @@
           <div class="row"
           *ngFor="let question of selectedQuiz.questions"
           >
-          <div class="col-md-10">
-<input type="text" class="form-control"
-[(ngModel)]="question.name">
+           <div class="col-md-10 mt-3">
+                <input type="text" class="form-control"
+                        [(ngModel)]="question.name"/>
 
+             </div>
+          <div class="col-md-2">
+            <button class="btn btn-link text-danger" >Remove Question</button>
           </div>
          
-
-
         </div>
       </div>
       <div class="card mt-3">
