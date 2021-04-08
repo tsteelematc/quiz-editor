@@ -21,28 +21,22 @@ export class AppComponent implements OnInit {
   loading = true;
 
   ngOnInit() {
-    this.quizSvc
-      .loadQuizzes()
-      .subscribe(
-        
-        // Lamda with the data
-        (data) => {
-          console.log(data);
-          this.quizzes = data;
-          this.loading = false;
-        }
-
-        // Lamda with the errors, if errors exist
-        , (err) => {
-          console.error(err);
-          this.errorLoadingQuizzes = true;
-          this.loading = false;
-        }
-
-      )
-    ;
-
+    this.loadQuizzesForDisplay();
     console.log(this.quizzes);
+  }
+
+  async loadQuizzesForDisplay() {
+    try {
+      this.quizzes = await this.quizSvc.loadQuizzes();
+      console.log(this.quizzes);
+      this.loading = false;
+    }
+
+    catch (err) {
+      console.error(err);
+      this.errorLoadingQuizzes = true;
+      this.loading = false;
+    }
   }
 
   title = 'quiz-editor';
