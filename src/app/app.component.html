@@ -68,16 +68,20 @@
           </span>
         </div>
         <div class="card-body">
-          <button class="btn btn-outline-success" (click)="addNewQuestion()"
-          
-          >
+          <button class="btn btn-outline-success" (click)="addNewQuestion()">
             Add New Question
           </button>
-          ng*For="let question of questions"
-          
-          class="list-group-item list-group-item-action d-flex justify-content-between"
-          [class.active]="quiz == selectedQuiz"
-          (click)="selectQuiz(quiz)"
+
+          <!--display the questions for each quiz -->
+          <div class="row"
+          *ngFor="let question of selectedQuiz.questions"
+          >
+          <div class="col-md-10">
+<input type="text" class="form-control"
+[(ngModel)]="question.name">
+
+          </div>
+         
 
 
         </div>
