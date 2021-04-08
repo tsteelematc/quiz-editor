@@ -139,7 +139,16 @@
           Other
         </div>
         <div class="card-body">
-          Coming soon
+          <div class="form-check">
+            <label class="form-check-label txt-danger">
+              <input 
+                type="checkbox" 
+                class="form-check-input"
+                [(ngModel)]="selectedQuiz.markedForDelete"
+              />
+              Mark for Delete
+            </label>
+          </div>
         </div>
       </div>
     </div>

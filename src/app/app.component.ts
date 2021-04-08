@@ -8,6 +8,7 @@ import { QuizService } from './quiz.service';
 interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
+  markedForDelete: boolean;
 }
 
 interface QuestionDisplay {
@@ -36,7 +37,11 @@ export class AppComponent implements OnInit {
 
   async loadQuizzesForDisplay() {
     try {
-      this.quizzes = await this.quizSvc.loadQuizzes();
+      this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
+        name: x.name
+        , questions: x.questions
+        , markedForDelete: false
+      }));
       console.log(this.quizzes);
       this.loading = false;
     } catch (err) {
@@ -59,6 +64,7 @@ export class AppComponent implements OnInit {
     const newQuiz = {
       name: "Untitled Quiz"
       , questions: []
+      , markedForDelete: false
     };
 
     this.quizzes = [
