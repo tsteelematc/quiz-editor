@@ -5,6 +5,22 @@ import {
 
 import { QuizService } from './quiz.service';
 
+interface QuizDisplay {
+    name: string;
+    //questions: {
+    //    name: string;
+    //}[];
+    questions: QuestionDisplay[];
+}
+
+// Type definitions are almost identical to interfaces...
+type QuestionDisplay = {
+    name: string;
+}
+
+//type Foo = "bar" | "cat";
+//const myFoo: Foo = "Dog";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +32,7 @@ export class AppComponent implements OnInit {
     private quizSvc: QuizService
   ) {}
 
-  quizzes = [];
+  quizzes: QuizDisplay[] = [];
   errorLoadingQuizzes = false;
   loading = true;
 
@@ -40,7 +56,7 @@ export class AppComponent implements OnInit {
 
   title = 'quiz-editor';
 
-  selectedQuiz = undefined;
+  selectedQuiz: QuizDisplay = undefined;
 
   selectQuiz(q) {
     this.selectedQuiz = q;
