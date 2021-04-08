@@ -5,6 +5,13 @@ import {
 
 import { QuizService } from './quiz.service';
 
+interface QuizDisplay {
+  name: string;
+  questions: {
+    name: string;
+  }[];
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +23,7 @@ export class AppComponent implements OnInit {
     private quizSvc: QuizService
   ) {}
 
-  quizzes = [];
+  quizzes: QuizDisplay[] = [];
   errorLoadingQuizzes = false;
   loading = true;
 
@@ -28,7 +35,10 @@ export class AppComponent implements OnInit {
   async loadQuizzesToDisplay() {
     console.log("here");
     try {
-      this.quizzes = await this.quizSvc.loadQuizzes();
+      this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
+        name: x.name
+        , questions: x.questions
+      }));
       this.loading = false;
     }
 
