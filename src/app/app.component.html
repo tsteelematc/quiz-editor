@@ -1,5 +1,5 @@
 <div class="container">
-  <div 
+  <div
     class="mt-3 alert alert-dark"
     *ngIf="loading"
   >
@@ -7,7 +7,7 @@
       Loading...
     </h3>
   </div>
-  <div 
+  <div
     class="mt-3 alert alert-danger"
     *ngIf="errorLoadingQuizzes"
   >
@@ -16,12 +16,12 @@
     </h3>
     "Refresh" to try again...
   </div>
-  <div 
+  <div
     class="row"
     *ngIf="!errorLoadingQuizzes && !loading"
   >
     <div class="col-md-4">
-      <button 
+      <button
         class="btn btn-outline-success mt-3"
         (click)="addNewQuiz()"
       >
@@ -44,7 +44,7 @@
         </button>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz == undefined"
     >
@@ -53,19 +53,19 @@
           No Quiz Selected
         </h3>
         Select or add a new quiz
-        <button 
+        <button
           class="btn btn-link"
           (click)="jsPromisesOne()"
         >
           JS Promises 1
         </button>
-        <button 
+        <button
           class="btn btn-link"
           (click)="jsPromisesTwo()"
         >
           2
         </button>
-        <button 
+        <button
           class="btn btn-link"
           (click)="jsPromisesThree()"
         >
@@ -73,7 +73,7 @@
         </button>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
@@ -88,7 +88,7 @@
           General
         </div>
         <div class="card-body">
-          <input 
+          <input
             type="text"
             class="form-control"
             [(ngModel)]="selectedQuiz.name"
@@ -98,7 +98,7 @@
       <div class="card mt-3">
         <div class="card-header">
           Questions
-          <span 
+          <span
             class="ml-3 text-warning"
             *ngIf="selectedQuiz.questions.length == 0"
           >
@@ -106,25 +106,25 @@
           </span>
         </div>
         <div class="card-body">
-          <button 
+          <button
             class="btn btn-outline-success"
             (click)="addNewQuestion()"
           >
             Add New Question
           </button>
-          <div 
+          <div
             class="row mt-3"
             *ngFor="let question of selectedQuiz.questions"
           >
             <div class="col-md-10">
-              <input 
+              <input
                 type="text"
                 class="form-control"
                 [(ngModel)]="question.name"
               />
             </div>
             <div class="col-md-2">
-              <button 
+              <button
                 class="btn btn-link text-danger"
                 (click)="removeQuestion(question)"
               >
@@ -139,7 +139,16 @@
           Other
         </div>
         <div class="card-body">
-          Coming soon
+          <div class="form-check">
+            <label class="form-check-label text-danger">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [(ngModel)]="selectedQuiz.markedForDelete"
+              />
+              Mark For Delete
+            </label>
+          </div>
         </div>
       </div>
     </div>
