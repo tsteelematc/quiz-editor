@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -98,11 +98,11 @@ export class AppComponent implements OnInit {
       , {
         name: "Untitled Question"
       }
-    ];    
+    ];
   }
 
   jsPromisesOne() {
-    
+
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -160,5 +160,10 @@ export class AppComponent implements OnInit {
     catch (err) {
       console.error(err);
     }
+  }
+
+  cancelAllChanges() {
+    this.loadQuizzesForDisplay();
+    this.selectedQuiz = undefined;
   }
 }
