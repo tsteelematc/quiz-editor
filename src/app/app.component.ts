@@ -188,8 +188,16 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x => x.markedForDelete);
   }
 
+  get deletedQuizToolTip() {
+    return `${this.deletedQuizCount} ${this.deletedQuizCount == 1 ? "quiz" : "quizzes"} will be deleted`;
+  }
+
   get newlyAddedQuizCount() {
     return this.getNewlyAddedQuizCount().length
+  }
+
+  get newlyAddedQuizToolTip() {
+    return `${this.newlyAddedQuizCount} ${this.newlyAddedQuizCount == 1 ? "quiz" : "quizzes"} will be added`;
   }
 
   getNewlyAddedQuizCount() {
@@ -204,4 +212,8 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x => !x.markedForDelete && !x.newlyAdded && this.generateCheckSum(x) != x.naiveCheckSum)
   }
 
+  get editedQuizToolTip() {
+    return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be edited`;
+  }
+  
 }
