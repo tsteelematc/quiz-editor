@@ -17,6 +17,9 @@ interface QuizDisplay {
   markedForDelete: boolean;
 
   newlyAdded: boolean;
+
+  naiveCheckSum: string;
+
 }
 
 // Type definitions are almost identical to interfaces...
@@ -48,6 +51,10 @@ export class AppComponent implements OnInit {
     console.log(this.quizzes);
   }
 
+  generateCheckSum(q): string {
+    return q.name + q.questions.map(x => "~" + x.name).join('');
+  }
+
   async loadQuizzesForDisplay() {
     try {
       this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
@@ -55,6 +62,7 @@ export class AppComponent implements OnInit {
         , questions: x.questions
         , markedForDelete: false
         , newlyAdded: false
+        , naiveCheckSum: this.generateCheckSum(x)
       }));
       console.log(this.quizzes);
       this.loading = false;
@@ -82,6 +90,7 @@ export class AppComponent implements OnInit {
       , questions: []
       , markedForDelete: false
       , newlyAdded: true
+      , naiveCheckSum: ""
     };
 
     this.quizzes = [
@@ -185,6 +194,14 @@ export class AppComponent implements OnInit {
 
   getNewlyAddedQuizCount() {
     return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
+  }
+
+  get editedQuizCount() {
+    return this.getEditedQuizzes().length;
+  }
+
+  getEditedQuizzes() {
+    return this.quizzes.filter(x => !x.markedForDelete && !x.newlyAdded && this.generateCheckSum(x) != x.naiveCheckSum)
   }
 
 }
