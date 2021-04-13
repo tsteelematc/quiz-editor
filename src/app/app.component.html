@@ -86,6 +86,12 @@
         >
           -{{ deletedQuizCount }}
         </span>
+        <span
+          class="badge badge-success ml-1"
+          *ngIf="newlyAddedQuizCount > 0"
+        >
+          +{{ newlyAddedQuizCount }}
+        </span>
       </button>
       <button
         class="btn btn-link mt-3"

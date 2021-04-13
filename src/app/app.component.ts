@@ -15,6 +15,8 @@ interface QuizDisplay {
   questions: QuestionDisplay[];
 
   markedForDelete: boolean;
+
+  newlyAdded: boolean;
 }
 
 // Type definitions are almost identical to interfaces...
@@ -52,6 +54,7 @@ export class AppComponent implements OnInit {
         name: x.name
         , questions: x.questions
         , markedForDelete: false
+        , newlyAdded: false
       }));
       console.log(this.quizzes);
       this.loading = false;
@@ -78,6 +81,7 @@ export class AppComponent implements OnInit {
       name: "Untitled Quiz"
       , questions: []
       , markedForDelete: false
+      , newlyAdded: true
     };
 
     this.quizzes = [
@@ -173,5 +177,13 @@ export class AppComponent implements OnInit {
 
   getDeletedQuizzes() {
     return this.quizzes.filter(x => x.markedForDelete);
+  }
+
+  get newlyAddedQuizCount() {
+    return this.getNewlyAddedQuizzes().length;
+  }
+
+  getNewlyAddedQuizzes() {
+    return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
   }
 }
