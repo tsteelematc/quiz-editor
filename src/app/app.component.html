@@ -1,11 +1,12 @@
 <div class="container">
   <div 
-    class="mt-3 alert alert-dark"
+    class="mt-3 alert alert-light"
     *ngIf="loading"
   >
-    <h3>
+    <button class="btn btn-primary" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Loading...
-    </h3>
+    </button>
   </div>
   <div 
     class="mt-3 alert alert-danger"
