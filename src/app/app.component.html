@@ -85,17 +85,20 @@
         Save Quizzes
         <span 
           class="badge badge-danger ml-1"
-          *ngIf="deletedQuizCount > 0">
+          *ngIf="deletedQuizCount > 0"
+          [title]="deletedQuizTooltip">
           -{{ deletedQuizCount }}
         </span>
         <span 
           class="badge badge-success ml-1"
-          *ngIf="NewlyAddedQuizCount > 0">
+          *ngIf="NewlyAddedQuizCount > 0"
+          [title]="newlyAddedQuizTooltip">
           +{{ NewlyAddedQuizCount }}
         </span>
         <span 
           class="badge badge-light ml-1"
-          *ngIf="EditedQuizCount > 0">
+          *ngIf="EditedQuizCount > 0"
+          [title]="editedQuizTooltip">
           * {{ EditedQuizCount }}
         </span>
       </button>
