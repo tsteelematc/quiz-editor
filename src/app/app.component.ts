@@ -188,12 +188,20 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x => x.markedForDelete);
   }
 
+  get deletedQuizTooltip() {
+    return `${this.deletedQuizCount} ${this.deletedQuizCount == 1 ? "quiz" : "quizzes"} will be deleted`;
+  }
+
   get newlyAddedQuizCount() {
     return this.getNewlyAddedQuizzes().length;
   }
 
   getNewlyAddedQuizzes() {
     return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
+  }
+
+  get newlyAddedQuizTooltip() {
+    return `${this.newlyAddedQuizCount} ${this.newlyAddedQuizCount == 1 ? "quiz" : "quizzes"} will be added`;
   }
 
   get editedQuizCount() {
@@ -207,4 +215,8 @@ export class AppComponent implements OnInit {
                 && this.generateChecksum(x) != x.naiveChecksum 
       );
   }
+
+  get editedQuizTooltip() {
+    return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
+  }  
 }

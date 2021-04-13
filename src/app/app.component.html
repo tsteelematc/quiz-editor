@@ -87,18 +87,21 @@
         <span 
           class="badge badge-danger ml-1"
           *ngIf="deletedQuizCount > 0"
+          [title]="deletedQuizTooltip"
         >
           -{{ deletedQuizCount }}
         </span>
         <span 
           class="badge badge-success ml-1"
           *ngIf="newlyAddedQuizCount > 0"
+          [title]="newlyAddedQuizTooltip"
         >
           +{{ newlyAddedQuizCount }}
         </span>
         <span 
           class="badge badge-light ml-1"
           *ngIf="editedQuizCount > 0"
+          [title]="editedQuizTooltip"
         >
           * {{ editedQuizCount }}
         </span>
