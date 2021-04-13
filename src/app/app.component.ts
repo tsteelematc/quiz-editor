@@ -1,6 +1,6 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
 import { QuizService } from './quiz.service';
@@ -20,7 +20,7 @@ interface QuizDisplay {
 // Type definitions are almost identical to interfaces...
 type QuestionDisplay = {
   name: string;
-}
+};
 
 //type Foo = "Bar" | "Cat";
 //const myFoo: Foo = "Dog";
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes: QuizDisplay[] = [];
   errorLoadingQuizzes = false;
@@ -98,11 +98,11 @@ export class AppComponent implements OnInit {
       , {
         name: "Untitled Question"
       }
-    ];    
+    ];
   }
 
   jsPromisesOne() {
-    
+
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -119,12 +119,12 @@ export class AppComponent implements OnInit {
         n2
           .then(number => console.log(number))
           .catch(err => console.error(err))
-        ;
+          ;
       })
       .catch(err => {
-        console.error(err)
+        console.error(err);
       })
-    ;
+      ;
   }
 
   async jsPromisesTwo() {
@@ -160,5 +160,10 @@ export class AppComponent implements OnInit {
     catch (err) {
       console.error(err);
     }
+  }
+
+  cancelAllChanges() {
+    this.loadQuizzesForDisplay();
+    this.selectedQuiz = undefined;
   }
 }
