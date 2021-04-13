@@ -2,6 +2,7 @@ import {
   Component
   , OnInit 
 } from '@angular/core';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 import { QuizService } from './quiz.service';
 
@@ -15,6 +16,10 @@ interface QuizDisplay {
   questions: QuestionDisplay[];
 
   markedForDelete: boolean;
+
+  newlyAdded: boolean;
+
+  naiveCheckSum: string; 
 }
 
 // Type definitions are almost identical to interfaces...
@@ -45,13 +50,17 @@ export class AppComponent implements OnInit {
     this.loadQuizzesForDisplay();
     console.log(this.quizzes);
   }
-
+generateCheckSum(q): string {
+  return q.name + q.questions.map(x => "~" + x.name).join('');
+}
   async loadQuizzesForDisplay() {
     try {
       this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
         name: x.name
         , questions: x.questions
         , markedForDelete: false
+        ,newlyAdded: false
+        ,naiveCheckSum: this.generateCheckSum(x)
       }));
       console.log(this.quizzes);
       this.loading = false;
@@ -78,6 +87,8 @@ export class AppComponent implements OnInit {
       name: "Untitled Quiz"
       , questions: []
       , markedForDelete: false
+      , newlyAdded: true
+      , naiveCheckSum: ""
     };
 
     this.quizzes = [
@@ -160,5 +171,40 @@ export class AppComponent implements OnInit {
     catch (err) {
       console.error(err);
     }
+  }
+  cancelAllChanges() {
+    this.loadQuizzesForDisplay();
+    this.selectQuiz = undefined;
+  }
+  get deletedQuizCount() {
+    return this.getDeletedQuizzes().length;
+  }
+  getDeletedQuizzes() {
+    return this.quizzes.filter(x => x.markedForDelete);
+  }
+  get deletedTooltip() {
+    return `${this.deletedQuizCount} ${this.deletedQuizCount == 1 ? "quiz" : "quizzes"} will be deleted`
+  }
+  get newlyAddedQuizCount() {
+    return this.getNewlyAddedQuizzes().length;
+  }
+  getNewlyAddedQuizzes() {
+    return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
+  }
+  get newlyAddedTooltip() {
+    return `${this.newlyAddedQuizCount} ${this.newlyAddedQuizCount == 1 ? "quiz" : "quizzes"} added`
+  }
+  get editedQuizCount() {
+    return  this.getEditedQuizzes().length;
+  }
+  getEditedQuizzes() {
+    return this.quizzes
+    .filter(x => !x.markedForDelete 
+              && !x.newlyAdded 
+              && this.generateCheckSum(x) != x.naiveCheckSum
+    );
+  }
+  get editedQuizTooltip() {
+    return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} changed`
   }
 }
