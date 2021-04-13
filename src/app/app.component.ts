@@ -205,7 +205,8 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x =>
       !x.markedForDelete &&
       !x.newlyAdded &&
-      // Quiz is not different that when first loaded from the cloud
+      // New checksum is now different than what is what when the quiz was loaded from the cloud
+      // This means that the quiz was edited
       this.generateChecksum(x) != x.naiveChecksum
     );
   }
