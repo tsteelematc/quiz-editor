@@ -80,8 +80,8 @@
     >
       <button 
         class="btn mt-3"
-        [class.btn-outline-dark]="deletedQuizCount + NewlyAddedQuizCount + EditedQuizCount == 0"
-        [class.btn-dark]="deletedQuizCount + NewlyAddedQuizCount + EditedQuizCount > 0">
+        [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
+        [class.btn-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount > 0">
         Save Quizzes
         <span 
           class="badge badge-danger ml-1"
@@ -91,15 +91,15 @@
         </span>
         <span 
           class="badge badge-success ml-1"
-          *ngIf="NewlyAddedQuizCount > 0"
+          *ngIf="newlyAddedQuizCount > 0"
           [title]="newlyAddedQuizTooltip">
-          +{{ NewlyAddedQuizCount }}
+          +{{ newlyAddedQuizCount }}
         </span>
         <span 
           class="badge badge-light ml-1"
-          *ngIf="EditedQuizCount > 0"
+          *ngIf="editedQuizCount > 0"
           [title]="editedQuizTooltip">
-          * {{ EditedQuizCount }}
+          * {{ editedQuizCount }}
         </span>
       </button>
       <button 

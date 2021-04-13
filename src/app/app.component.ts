@@ -193,19 +193,19 @@ export class AppComponent implements OnInit {
   }
 
   // Read only property that executes code
-  get NewlyAddedQuizCount() {
+  get newlyAddedQuizCount() {
     return this.getNewlyAddedQuizzes().length;
   }
 
   get newlyAddedQuizTooltip() {
-    return `${this.NewlyAddedQuizCount} ${this.NewlyAddedQuizCount == 1 ? "quiz" : "quizzes"} will be added`;
+    return `${this.newlyAddedQuizCount} ${this.newlyAddedQuizCount == 1 ? "quiz" : "quizzes"} will be added`;
   }
 
   getNewlyAddedQuizzes() {
     return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
   }
 
-  get EditedQuizCount() {
+  get editedQuizCount() {
     return this.getEditedQuizzes().length;
   }
 
@@ -220,6 +220,6 @@ export class AppComponent implements OnInit {
   }
 
   get editedQuizTooltip() {
-    return `${this.EditedQuizCount} ${this.EditedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
+    return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
   }
 }
