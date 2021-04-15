@@ -183,6 +183,7 @@ export class AppComponent implements OnInit {
     this.loadQuizzesForDisplay();
     this.selectedQuiz = undefined;
   }
+<<<<<<< Updated upstream
 
   get deletedQuizCount() {
     return this.getDeletedQuizzes().length;
@@ -248,4 +249,6 @@ export class AppComponent implements OnInit {
       console.error(err);
     }
   }
+=======
+>>>>>>> Stashed changes
 }

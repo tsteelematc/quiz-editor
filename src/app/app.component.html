@@ -78,6 +78,7 @@
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
+<<<<<<< Updated upstream
       <button 
         class="btn mt-3"
         [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
@@ -112,6 +113,16 @@
         (click)="cancelAllChanges()"
       >
         Cancel
+=======
+      <button class="btn btn-outline-dark mt-3">
+        Save Quizzes
+      </button>
+      <button 
+      class="btn btn-link mt-3"
+      (click)="cancelAllChanges()"
+      >
+        Cancel 
+>>>>>>> Stashed changes
       </button>
       <div class="card mt-3">
         <div class="card-header">
