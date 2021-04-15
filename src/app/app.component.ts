@@ -1,9 +1,14 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
-import { QuizService } from './quiz.service';
+import {
+  QuizService,
+  QuirkyShapeForSavingEditedQuizzes,
+  QuirkyShapeForSavingNewQuizzes
+
+} from './quiz.service';
 
 interface QuizDisplay {
   name: string;
@@ -25,7 +30,7 @@ interface QuizDisplay {
 // Type definitions are almost identical to interfaces...
 type QuestionDisplay = {
   name: string;
-}
+};
 
 //type Foo = "Bar" | "Cat";
 //const myFoo: Foo = "Dog";
@@ -40,7 +45,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes: QuizDisplay[] = [];
   errorLoadingQuizzes = false;
@@ -111,11 +116,11 @@ export class AppComponent implements OnInit {
       , {
         name: "Untitled Question"
       }
-    ];    
+    ];
   }
 
   jsPromisesOne() {
-    
+
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -132,12 +137,12 @@ export class AppComponent implements OnInit {
         n2
           .then(number => console.log(number))
           .catch(err => console.error(err))
-        ;
+          ;
       })
       .catch(err => {
-        console.error(err)
+        console.error(err);
       })
-    ;
+      ;
   }
 
   async jsPromisesTwo() {
@@ -210,13 +215,40 @@ export class AppComponent implements OnInit {
 
   getEditedQuizzes() {
     return this.quizzes
-      .filter(x => !x.markedForDelete 
-                && !x.newlyAdded 
-                && this.generateChecksum(x) != x.naiveChecksum 
+      .filter(x => !x.markedForDelete
+        && !x.newlyAdded
+        && this.generateChecksum(x) != x.naiveChecksum
       );
   }
 
   get editedQuizTooltip() {
     return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
-  }  
+  }
+
+  async saveQuizzes() {
+
+    try {
+      // ({}) in map() => The parenthesis makes it an expression to be evaluated instead of a multiline statement that needs to return something
+      const editedQuizzes: QuirkyShapeForSavingEditedQuizzes[] = this.getEditedQuizzes().map(x => ({
+        quiz: x.name,
+        questions: x.questions.map(y => ({
+          question: y.name
+        }))
+      }));
+
+      const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = [];
+
+      const numberOfEditedQuizzesSaved = await this.quizSvc.saveQuizzes(
+        editedQuizzes,
+        newQuizzes
+      );
+
+      console.log(numberOfEditedQuizzesSaved);
+
+    } catch (err) {
+
+      console.error(err);
+    }
+  }
+
 }
