@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-export interface SaveQuizzesApiShape {
-  changedQuizzes: QuirkyShapeForSavingEditedQuizzes[];
-newQuizzes: QuirkyShapeForSavingNewQuizzes[];
-}
-​
 export interface QuirkyShapeForSavingEditedQuizzes {
-quiz: string;
-questions: { question: string; }[];
+  quiz: string;
+  questions: { question: string; }[];
 }
 ​
 export interface QuirkyShapeForSavingNewQuizzes {
-quizName: string;
-quizQuestions: string[];
+  quizName: string;
+  quizQuestions: string[];
 }
 
 @Injectable({
