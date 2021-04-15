@@ -82,6 +82,7 @@
         class="btn mt-3"
         [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
         [class.btn-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount > 0"
+        (click) = "saveQuizzes()"
       >
         Save Quizzes
         <span 

@@ -3,7 +3,12 @@ import {
   , OnInit 
 } from '@angular/core';
 
-import { QuizService } from './quiz.service';
+import { 
+  QuizService
+  , QuirkyShapeForSavingEditedQuizzes
+  , QuirkyShapeForSavingNewQuizzes
+} from './quiz.service';
+
 
 interface QuizDisplay {
   name: string;
@@ -219,4 +224,25 @@ export class AppComponent implements OnInit {
   get editedQuizTooltip() {
     return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
   }  
+
+  async saveQuizzes() {
+    try {
+
+      const editedQuizzes: QuirkyShapeForSavingEditedQuizzes[] = this.getEditedQuizzes().map(x => ({
+        quiz: x.name
+        , questions: x.questions.map(y => ({
+          question: y.name
+        }))
+      }));
+      const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = [];
+
+      const numberOfEditedQuizzesSaved = await this.quizSvc.saveQuizzes(editedQuizzes, newQuizzes);
+
+      console.log(numberOfEditedQuizzesSaved)
+
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
 }
