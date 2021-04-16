@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+    // console.log(this.selectedQuiz.questions);
+    
   }
 
   title = 'quiz-editor';
