@@ -13,15 +13,23 @@ export class QuizService {
         {
           name: "Quiz 1", 
           questions: [
-            "Foo", 
-            "Bar"
+              {
+                  name: "Foo?"
+              },
+              {
+                name: "Bar?"
+            },
           ]
         }, 
         {
           name: "Quiz 2", 
           questions: [
-            "Rigby", 
-            "Tank"
+            {
+                name: "Why is Rigby the best cat?"
+            },
+            {
+              name: "What's Tank's favorite toy?"
+          },
           ]
         },
         {
