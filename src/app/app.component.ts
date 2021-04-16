@@ -232,7 +232,10 @@ export class AppComponent implements OnInit {
           question: y.name
         }))
       }));
-      const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = [];
+      const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = this.getNewlyAddedQuizzes().map(x => ({
+        quizName: x.name
+        , quizQuestions: x.questions.map(y => y.name)
+      }));
 
       const numberofEditedQuizzesSaved = await this.quizSvc.saveQuizzes(
         editedQuizzes
