@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
     
   }
 
+  errorLoadingQuizzes = false; 
+
   quizzes = []; 
 
   ngOnInit() {
@@ -28,9 +30,13 @@ export class AppComponent implements OnInit {
             (data) => {
                 console.log(data);
                 this.quizzes = data;
+                this.errorLoadingQuizzes = false;
             },
             // lambda with errors
-            (error) => console.log(error)
+            (error) => {
+                console.log(error);
+                this.errorLoadingQuizzes = true;
+            }
         ); 
     // console.log(this.quizzes);
     
