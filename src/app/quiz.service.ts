@@ -36,8 +36,8 @@ export class QuizService {
         );
       }
 
-      saveQuizzes(changedQuizzes: QuirkyShapeForSavingEditedQuizzes[]
-                 ,newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []) {
+      saveQuizzes(changedQuizzes: QuirkyShapeForSavingEditedQuizzes[],
+                 newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []) {
 
             let h = new HttpHeaders({
               'Content-Type': 'application/json'

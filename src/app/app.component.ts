@@ -212,10 +212,9 @@ export class AppComponent implements OnInit {
   }
 
   getEditedQuizzes() {
-    return this.quizzes
-      .filter(x => !x.markedForDelete
-                && !x.newlyAdded
-                && this.generateChecksum(x) != x.naiveChecksum
+    return this.quizzes.filter(x => !x.markedForDelete
+                                 && !x.newlyAdded
+                                 && this.generateChecksum(x) != x.naiveChecksum
       );
   }
 
@@ -227,15 +226,14 @@ export class AppComponent implements OnInit {
       try {
           const editedQuizzes: QuirkyShapeForSavingEditedQuizzes[] = this.getEditedQuizzes().map(x => ({
               quiz: x.name,
-              questions: x.questions.map(y => ({
-                  question: y.name
-              }))
+              questions: x.questions.map(y => ({question: y.name}))
           }));
 
-          const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = [];
-
-
-
+          //const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = [];
+          const newQuizzes: QuirkyShapeForSavingNewQuizzes[] = this.getNewlyAddedQuizzes().map(x => ({
+              quizName: x.name,
+              quizQuestions: x.questions.map(y => y.name)
+          }));
 
           const numberOfEditedQuizzesSaved = await this.quizSvc.saveQuizzes(
               editedQuizzes,
