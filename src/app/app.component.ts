@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   errorLoadingQuizzes = false; 
+  loading = true; 
 
   quizzes = []; 
 
@@ -31,11 +32,13 @@ export class AppComponent implements OnInit {
                 console.log(data);
                 this.quizzes = data;
                 this.errorLoadingQuizzes = false;
+                this.loading = false;
             },
             // lambda with errors
             (error) => {
                 console.log(error);
                 this.errorLoadingQuizzes = true;
+                this.loading = false; 
             }
         ); 
     // console.log(this.quizzes);
