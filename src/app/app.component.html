@@ -82,41 +82,45 @@
       <div 
         *ngIf="selectedQuiz != undefined"
       >
-      <button 
-        class="btn mt-3"
-        [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
-        [class.btn-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount > 0"
-        (click)="saveQuizzes()"
+      <div
+        [@pulseSaveCancelButtons]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount > 0 ? 'somethingToSave' : 'nothingToSave'"
       >
-        Save Quizzes
-        <span 
-          class="badge badge-danger ml-1"
-          *ngIf="deletedQuizCount > 0"
-          [title]="deletedQuizTooltip"
+        <button 
+          class="btn mt-3"
+          [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
+          [class.btn-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount > 0"
+          (click)="saveQuizzes()"
         >
-          -{{ deletedQuizCount }}
-        </span>
-        <span 
-          class="badge badge-success ml-1"
-          *ngIf="newlyAddedQuizCount > 0"
-          [title]="newlyAddedQuizTooltip"
+          Save Quizzes
+          <span 
+            class="badge badge-danger ml-1"
+            *ngIf="deletedQuizCount > 0"
+            [title]="deletedQuizTooltip"
+          >
+            -{{ deletedQuizCount }}
+          </span>
+          <span 
+            class="badge badge-success ml-1"
+            *ngIf="newlyAddedQuizCount > 0"
+            [title]="newlyAddedQuizTooltip"
+          >
+            +{{ newlyAddedQuizCount }}
+          </span>
+          <span 
+            class="badge badge-light ml-1"
+            *ngIf="editedQuizCount > 0"
+            [title]="editedQuizTooltip"
+          >
+            * {{ editedQuizCount }}
+          </span>
+        </button>
+        <button 
+          class="btn btn-link mt-3"
+          (click)="cancelAllChanges()"
         >
-          +{{ newlyAddedQuizCount }}
-        </span>
-        <span 
-          class="badge badge-light ml-1"
-          *ngIf="editedQuizCount > 0"
-          [title]="editedQuizTooltip"
-        >
-          * {{ editedQuizCount }}
-        </span>
-      </button>
-      <button 
-        class="btn btn-link mt-3"
-        (click)="cancelAllChanges()"
-      >
-        Cancel
-      </button>
+          Cancel
+        </button>
+      </div>
       <div class="card mt-3">
         <div class="card-header">
           General
