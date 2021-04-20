@@ -74,10 +74,14 @@
         </button>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
-      *ngIf="selectedQuiz != undefined"
+      [@detailsFromLeft]="detailsFromLeftAnimationState"
+      (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
     >
+      <div 
+        *ngIf="selectedQuiz != undefined"
+      >
       <button 
         class="btn mt-3"
         [class.btn-outline-dark]="deletedQuizCount + newlyAddedQuizCount + editedQuizCount == 0"
@@ -180,6 +184,7 @@
             </label>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
