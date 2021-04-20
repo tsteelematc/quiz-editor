@@ -136,4 +136,9 @@ export class AppComponent implements OnInit {
     
     
   }
+
+  cancelAllChanges() {
+      this.loadQuizzesForDisplay(); 
+      this.selectedQuiz = undefined; 
+  }
 }

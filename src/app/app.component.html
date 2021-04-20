@@ -30,7 +30,7 @@
                     >
                         {{ (quiz === selectedQuiz) ? selectedQuiz.name : quiz.name}}
 
-                        <small
+                        <small 
                             class="font-italic font-weight-lighter"
                             [class.text-warning]="quiz.questions.length == 0"
                         >
@@ -72,9 +72,12 @@
             *ngIf="selectedQuiz != undefined"
         >
             <button class="btn btn-outline-dark mt-3">
-                Save
+                Save Quizzes
             </button>
-            <button class="btn btn-link mt-3">Cancel</button>
+            <button 
+                class="btn btn-link mt-3"
+                (click)="cancelAllChanges()"
+            >Cancel All Changes</button>
 
             <div class="card mt-3">
                 <div class="card-header">General</div>
