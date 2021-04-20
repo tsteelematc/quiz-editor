@@ -11,11 +11,7 @@
     >
         <h3>Error loading quizzes!</h3>
     </div>
-    <div
-        class="row"
-        *ngIf="!errorLoadingQuizzes"    
-    >
-    <div class="row">
+    <div class="row" *ngIf="!errorLoadingQuizzes">
         <div class="col-md-4">
             <button 
                 class="btn btn-outline-success mt-3"
@@ -48,7 +44,27 @@
             *ngIf="selectedQuiz == undefined"    
         >
             <h3>No Quiz Selected</h3>
-            <p class="alert alert-info">Select a Quiz!</p>
+            <p class="alert alert-info">
+                Select a Quiz!
+                <button 
+                    class="btn btn-link"
+                    (click)="jsPromisesOne()"    
+                >
+                    JS Promises 1
+                </button>
+                <button 
+                    class="btn btn-link"
+                    (click)="jsPromisesTwo()"    
+                >
+                    JS Promises 2
+                </button>
+                <button 
+                    class="btn btn-link"
+                    (click)="jsPromisesThree()"    
+                >
+                    JS Promises 3
+                </button>
+            </p>
         </div>
         <div 
             class="col-md-8"
