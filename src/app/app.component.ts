@@ -3,18 +3,30 @@ import { QuizService } from './quiz.service';
 
 import { FormsModule } from '@angular/forms';
 
+
+interface QuizDisplay {
+  name: string; 
+  questions: QuestionDisplay[]; 
+}
+
+interface QuestionDisplay {
+  name: string;
+
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-})
+}) 
+
 export class AppComponent implements OnInit {
   constructor(private quizSvc: QuizService) {}
 
   errorLoadingQuizzes = false;
   loading = true;
 
-  quizzes = [];
+  quizzes : QuizDisplay[] = [];
 
   ngOnInit() {
     this.loadQuizzesForDisplay(); 
@@ -35,7 +47,7 @@ export class AppComponent implements OnInit {
   
   }
 
-  selectedQuiz = undefined;
+  selectedQuiz : QuizDisplay = undefined;
 
   selectQuiz(q) {
     this.selectedQuiz = q;
