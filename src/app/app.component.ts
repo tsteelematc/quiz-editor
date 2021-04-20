@@ -8,6 +8,7 @@ interface QuizDisplay {
   name: string; 
   questions: QuestionDisplay[]; 
   markedForDelete: boolean; 
+  newlyAdded: boolean;
 }
 
 interface QuestionDisplay {
@@ -39,7 +40,8 @@ export class AppComponent implements OnInit {
       this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
         name: x.name, 
         questions: x.questions, 
-        markedForDelete: false
+        markedForDelete: false, 
+        newlyAdded: false
       }));
       console.log(this.quizzes);
       this.errorLoadingQuizzes = false;
@@ -66,7 +68,8 @@ export class AppComponent implements OnInit {
     let newQuiz = {
       name: 'Untitled Quiz',
       questions: [],
-      markedForDelete: false
+      markedForDelete: false, 
+      newlyAdded: true
     };
 
     this.quizzes = [...this.quizzes, newQuiz];
@@ -148,5 +151,13 @@ export class AppComponent implements OnInit {
 
   getDeletedQuizzes() {
       return this.quizzes.filter(x => x.markedForDelete); 
+  }
+
+  get newlyAddedCount() {
+      return this.getNewlyAdded().length; 
+  }
+
+  getNewlyAdded() {
+      return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete); 
   }
 }
