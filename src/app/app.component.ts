@@ -1,13 +1,21 @@
-import { 
+import {
   Component
-  , OnInit 
+  , OnInit
 } from '@angular/core';
 
-import { 
+import {
   QuizService
   , QuirkyShapeForSavingEditedQuizzes
-  , QuirkyShapeForSavingNewQuizzes 
+  , QuirkyShapeForSavingNewQuizzes
 } from './quiz.service';
+
+import {
+  trigger,
+  transition,
+  animate,
+  keyframes,
+  style
+} from "@angular/animations";
 
 interface QuizDisplay {
   name: string;
@@ -29,7 +37,7 @@ interface QuizDisplay {
 // Type definitions are almost identical to interfaces...
 type QuestionDisplay = {
   name: string;
-}
+};
 
 //type Foo = "Bar" | "Cat";
 //const myFoo: Foo = "Dog";
@@ -38,13 +46,36 @@ type QuestionDisplay = {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('detailsFromLeft', [
+      transition('leftPosition => finalPosition', [
+        animate('300ms', keyframes([
+          style({ left: '-30px', offset: 0.0 }),
+          style({ left: '-20px', offset: 0.25 }),
+          style({ left: '-10px', offset: 0.5 }),
+          style({ left: '-5px', offset: 0.75 }),
+          style({ left: '0px', offset: 1.0 })
+        ]))
+      ]),
+    ]),
+    trigger('pulseSaveCancelButtons', [
+      transition('nothingToSave => somethingToSave', [
+        animate('400ms', keyframes([
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+          style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+          style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+        ]))
+      ])
+    ])
+  ]
+
 })
 export class AppComponent implements OnInit {
 
   constructor(
     private quizSvc: QuizService
-  ) {}
+  ) { }
 
   quizzes: QuizDisplay[] = [];
   errorLoadingQuizzes = false;
@@ -85,6 +116,7 @@ export class AppComponent implements OnInit {
 
   selectQuiz(q) {
     this.selectedQuiz = q;
+    this.detailsFromLeftAnimationState = "finalPosition";
   }
 
   addNewQuiz() {
@@ -115,11 +147,11 @@ export class AppComponent implements OnInit {
       , {
         name: "Untitled Question"
       }
-    ];    
+    ];
   }
 
   jsPromisesOne() {
-    
+
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -136,12 +168,12 @@ export class AppComponent implements OnInit {
         n2
           .then(number => console.log(number))
           .catch(err => console.error(err))
-        ;
+          ;
       })
       .catch(err => {
-        console.error(err)
+        console.error(err);
       })
-    ;
+      ;
   }
 
   async jsPromisesTwo() {
@@ -214,15 +246,15 @@ export class AppComponent implements OnInit {
 
   getEditedQuizzes() {
     return this.quizzes
-      .filter(x => !x.markedForDelete 
-                && !x.newlyAdded 
-                && this.generateChecksum(x) != x.naiveChecksum 
+      .filter(x => !x.markedForDelete
+        && !x.newlyAdded
+        && this.generateChecksum(x) != x.naiveChecksum
       );
   }
 
   get editedQuizTooltip() {
     return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`;
-  }  
+  }
 
   async saveQuizzes() {
     try {
@@ -248,4 +280,10 @@ export class AppComponent implements OnInit {
       console.error(err);
     }
   }
+
+  detailsFromLeftAnimationState = "leftPosition";
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsFromLeftAnimationState = "leftPosition";
+  };
 }
