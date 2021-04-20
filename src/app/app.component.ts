@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 interface QuizDisplay {
   name: string; 
   questions: QuestionDisplay[]; 
+  markedForDelete: boolean; 
 }
 
 interface QuestionDisplay {
@@ -35,7 +36,11 @@ export class AppComponent implements OnInit {
   async loadQuizzesForDisplay() {
 
     try {
-      this.quizzes = await this.quizSvc.loadQuizzes();
+      this.quizzes = (await this.quizSvc.loadQuizzes()).map(x => ({
+        name: x.name, 
+        questions: x.questions, 
+        markedForDelete: false
+      }));
       console.log(this.quizzes);
       this.errorLoadingQuizzes = false;
       this.loading = false;
@@ -61,6 +66,7 @@ export class AppComponent implements OnInit {
     let newQuiz = {
       name: 'Untitled Quiz',
       questions: [],
+      markedForDelete: false
     };
 
     this.quizzes = [...this.quizzes, newQuiz];
