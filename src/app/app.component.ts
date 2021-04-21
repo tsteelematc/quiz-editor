@@ -152,6 +152,10 @@ export class AppComponent implements OnInit {
       this.selectedQuiz = undefined; 
   }
 
+  get deletedQuizTooltip() {
+      return `${this.deletedQuizCount} ${this.deletedQuizCount == 1 ? "quiz" : "quizzes"} will be deleted`; 
+  }
+
   get deletedQuizCount() {
       return this.getDeletedQuizzes().length; 
   }
@@ -160,9 +164,17 @@ export class AppComponent implements OnInit {
       return this.quizzes.filter(x => x.markedForDelete); 
   }
 
+  get newlyAddedQuizTooltip() {
+    return `${this.newlyAddedCount} ${this.newlyAddedCount == 1 ? "quiz" : "quizzes"} will be added`; 
+}
+
   get newlyAddedCount() {
       return this.getNewlyAdded().length; 
   }
+
+  get editedQuizTooltip() {
+    return `${this.editedQuizCount} ${this.editedQuizCount == 1 ? "quiz" : "quizzes"} will be updated`; 
+}
 
   getNewlyAdded() {
       return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete); 

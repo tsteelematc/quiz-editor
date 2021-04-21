@@ -78,18 +78,21 @@
             >
                 Save Quizzes
                 <span 
+                    [title]="deletedQuizTooltip"
                     class="badge badge-danger ml-1"
                     *ngIf="deletedQuizCount > 0"
                 >
                     - {{ deletedQuizCount }}
                 </span>
                 <span 
+                    [title]="newlyAddedQuizTooltip"
                     class="badge badge-success ml-1"
                     *ngIf="newlyAddedCount > 0"
                 >
                     + {{ newlyAddedCount }}
                 </span>
                 <span 
+                    [title]="editedQuizTooltip"
                     class="badge badge-light ml-1"
                     *ngIf="editedQuizCount > 0"
                 >
